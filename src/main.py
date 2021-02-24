@@ -12,10 +12,11 @@ def numaudit(host,user,passwd,port,schema,tablename):
     oracle_element = oraclenum.OrCheck()
     tojson_element = tojson.ToJson()
     ##生成两个线程t1,t2查询数据库
-    t1 = MyThread(mysql_element.checkMysqlNum,args=(host, user, passwd, port, schema,tablename))
-    t2= MyThread(oracle_element.checkOracleNum,args=('192.168.177.133', 'SCOTT', 'tiger', tablename))
-    t1.start();t2.start();t1.join();t2.join()
-    mysqlNum=t1.get_result();oracleNum=t2.get_result()
+    thread1 = MyThread(mysql_element.checkMysqlNum,args=(host, user, passwd, port, schema,tablename))
+    thread2= MyThread(oracle_element.checkOracleNum,args=('192.168.177.133', 'SCOTT', 'tiger', tablename))
+    ##启动两个线程
+    thread1.start();thread2.start();thread1.join();thread2.join()
+    mysqlNum=thread1.get_result();oracleNum=thread2.get_result()
     NUMCHECK=[]
     i=0
     while i < len(mysqlNum):
