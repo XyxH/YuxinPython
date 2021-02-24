@@ -20,4 +20,5 @@ class OrCheck():
                 data = sys.exc_info()
                 data=data[1]
                 result.append(str(data))
+        db.close()
         return result

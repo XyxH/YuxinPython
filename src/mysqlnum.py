@@ -18,4 +18,5 @@ class MyCheck():  # 定义父类
                 data = sys.exc_info()
                 data="MySQL:"+str(data[1])[5:-1]
                 result.append(str(data).replace('\'','').replace(',','').replace('\"',''))
+        db.close()
         return result
